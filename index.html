@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html lang="id" class="no-js">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jeanini Soares — Portfolio</title>
+<meta name="description" content="Jeanini Soares — Data Analyst & Machine Learning Enthusiast. Portfolio berisi riset, proyek, pengalaman kerja ICT, dan keahlian data analysis, machine learning, serta NLP dari Timor-Leste.">
+<meta property="og:title" content="Jeanini Soares — Portfolio">
+<meta property="og:description" content="Data Analyst & Machine Learning Enthusiast — data analysis, predictive modeling, dan NLP research dari Timor-Leste.">
+<meta property="og:type" content="website">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230d1b2a'/%3E%3Ctext x='50' y='68' font-family='Georgia,serif' font-size='52' fill='%23f5f7f8' text-anchor='middle'%3EJS%3C/text%3E%3C/svg%3E">
+<script>
+  (function () {
+    if (localStorage.getItem('theme') === 'dark') {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    }
+  })();
+</script>
+<style>
+  /* ============================================
+     GANTI WARNA DI SINI KALAU MAU
+     ============================================ */
+  :root {
+    --ink: #0d1b2a;
+    --paper: #f5f7f8;
+    --accent: #3d6ea5;
+    --accent-soft: #a9c6e0;
+    --line: #dfe6ea;
+    --muted: #5c6b73;
+    --nav-bg: rgba(245, 247, 248, 0.85);
+  }
+
+  :root[data-theme="dark"] {
+    --ink: #eef3f7;
+    --paper: #0a141f;
+    --accent: #6ea8d8;
+    --accent-soft: #1f3b57;
+    --line: #22303d;
+    --muted: #8fa3b0;
+    --nav-bg: rgba(10, 20, 31, 0.85);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Georgia', 'Times New Roman', serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+    transition: background-color 0.4s ease, color 0.4s ease;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+  }
+  .email, .lang-level, .cert-list li { user-select: text; }
+  img { -webkit-user-drag: none; pointer-events: none; }
+
+  /* ---------- Progress bar ---------- */
+  .progress-bar {
+    position: fixed;
+    top: 0; left: 0;
+    height: 3px;
+    width: 0%;
+    background: var(--accent);
+    z-index: 200;
+    transition: width 0.1s linear, background-color 0.4s ease;
+  }
+
+  /* ---------- Navigasi ---------- */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 8vw;
+    background: var(--nav-bg);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+    z-index: 100;
+    transition: background-color 0.4s ease, border-color 0.4s ease;
+  }
+  nav .logo {
+    font-weight: bold;
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+  }
+  .nav-right { display: flex; align-items: center; gap: 20px; }
+  nav .links a {
+    color: var(--ink);
+    text-decoration: none;
+    margin-left: 28px;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    position: relative;
+    transition: color 0.2s;
+  }
+  nav .links a::after {
+    content: '';
+    position: absolute;
+    left: 0; bottom: -4px;
+    width: 0; height: 1px;
+    background: var(--accent);
+    transition: width 0.25s;
+  }
+  nav .links a:hover { color: var(--accent); }
+  nav .links a:hover::after { width: 100%; }
+  nav .links a.active { color: var(--accent); }
+  nav .links a.active::after { width: 100%; }
+
+  .theme-toggle {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid var(--line);
+    background: none;
+    color: var(--ink);
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color 0.2s, transform 0.4s, color 0.2s;
+  }
+  .theme-toggle:hover { border-color: var(--accent); color: var(--accent); transform: rotate(20deg); }
+
+  .menu-toggle { display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--ink); }
+
+  /* ---------- Hero ---------- */
+  header {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 48px 8vw;
+    position: relative;
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: minmax(220px, 320px) 1fr;
+    gap: 56px;
+    align-items: center;
+  }
+  .hero-photo {
+    width: min(280px, 100%);
+    margin: 0 auto;
+    border-radius: 50%;
+    border: 2px solid var(--accent);
+    padding: 8px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.1s, glowPulse 3s ease-in-out 1s infinite;
+    transition: border-color 0.4s ease;
+  }
+  .hero-photo img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    object-fit: cover;
+    filter: grayscale(55%) contrast(1.05);
+    transition: filter 0.5s ease, transform 0.5s ease;
+  }
+  .hero-photo:hover img { filter: grayscale(0%); transform: scale(1.05); }
+  @keyframes glowPulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(61, 110, 165, 0.25); }
+    50% { box-shadow: 0 0 0 14px rgba(61, 110, 165, 0); }
+  }
+  .eyebrow {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--accent);
+    margin-bottom: 24px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.2s;
+  }
+  header h1 {
+    font-size: clamp(2.8rem, 9vw, 6.5rem);
+    line-height: 1.02;
+    font-weight: normal;
+    letter-spacing: -2px;
+    max-width: 14ch;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.4s;
+  }
+  header h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  header .tagline {
+    margin-top: 32px;
+    font-size: 1.15rem;
+    color: var(--muted);
+    max-width: 46ch;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.6s;
+  }
+  .cv-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 36px;
+    padding: 14px 28px;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    text-decoration: none;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.75s;
+    transition: background-color 0.3s, color 0.3s, border-color 0.4s;
+  }
+  .cv-button:hover { background: var(--accent); color: var(--paper); }
+  header .scroll-hint {
+    margin-top: auto;
+    padding-top: 48px;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.9s;
+  }
+  .scroll-hint span { display: inline-block; animation: bob 1.8s ease-in-out infinite; }
+
+  /* ---------- Section umum ---------- */
+  section {
+    padding: 100px 8vw;
+    border-top: 1px solid var(--line);
+  }
+  .section-label {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--accent);
+    margin-bottom: 40px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .section-label::before {
+    content: '';
+    width: 40px; height: 1px;
+    background: var(--accent);
+  }
+
+  /* ---------- Tentang ---------- */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+  }
+  .about-grid .big {
+    font-size: clamp(1.5rem, 3.5vw, 2.4rem);
+    line-height: 1.4;
+    font-weight: normal;
+  }
+  .about-grid .big em { font-style: italic; color: var(--accent); }
+  .about-grid .detail { color: var(--muted); font-size: 1.05rem; }
+  .about-grid .detail p + p { margin-top: 18px; }
+
+  /* ---------- Skills ---------- */
+  .skills-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+  }
+  .skill {
+    background: var(--paper);
+    padding: 32px 28px;
+    transition: background 0.3s;
+  }
+  .skill:hover { background: var(--accent-soft); }
+  .skill .num {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 0.75rem;
+    color: var(--accent);
+    letter-spacing: 1px;
+  }
+  .skill h3 {
+    font-size: 1.4rem;
+    font-weight: normal;
+    margin: 12px 0 8px;
+  }
+  .skill p { font-size: 0.95rem; color: var(--muted); }
+
+  /* ---------- Proyek ---------- */
+  .project {
+    display: grid;
+    grid-template-columns: 80px 1fr auto;
+    gap: 32px;
+    align-items: center;
+    padding: 36px 0;
+    border-bottom: 1px solid var(--line);
+    text-decoration: none;
+    color: var(--ink);
+    transition: padding-left 0.3s;
+  }
+  .project:first-of-type { border-top: 1px solid var(--line); }
+  .project:hover { padding-left: 20px; }
+  .project .p-num {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 0.85rem;
+    color: var(--accent);
+  }
+  .project h3 { font-size: clamp(1.4rem, 3vw, 2rem); font-weight: normal; }
+  .project p { color: var(--muted); font-size: 0.95rem; margin-top: 4px; }
+  .project .arrow {
+    font-size: 1.5rem;
+    color: var(--accent);
+    transition: transform 0.3s;
+  }
+  .project:hover .arrow { transform: translateX(8px); }
+  .project.is-static { cursor: default; }
+  .project.is-static:hover { padding-left: 0; }
+
+  /* ---------- Riset ---------- */
+  .research-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 28px;
+  }
+  .research-card {
+    border: 1px solid var(--line);
+    padding: 32px 28px;
+    transition: border-color 0.3s, transform 0.3s;
+  }
+  .research-card:hover { border-color: var(--accent); transform: translateY(-4px); }
+  .research-card .r-num {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 0.75rem;
+    color: var(--accent);
+    letter-spacing: 1px;
+  }
+  .research-card h3 { font-size: 1.3rem; font-weight: normal; margin: 12px 0 8px; }
+  .research-card p { color: var(--muted); font-size: 0.95rem; margin-bottom: 20px; }
+  .research-card .download {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid var(--accent);
+    padding-bottom: 2px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .research-card .download:hover { color: var(--ink); border-color: var(--ink); }
+
+  /* ---------- Timeline (Education & Experience) ---------- */
+  .timeline-item {
+    position: relative;
+    margin-left: 8px;
+    padding-left: 36px;
+    padding-bottom: 36px;
+    border-left: 1px solid var(--line);
+  }
+  .timeline-item:last-child { border-left-color: transparent; padding-bottom: 0; }
+  .timeline-dot {
+    position: absolute;
+    left: -7px;
+    top: 6px;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background: var(--paper);
+    border: 2px solid var(--accent);
+    transition: background 0.3s;
+  }
+  .timeline-item.open .timeline-dot,
+  .timeline-item:hover .timeline-dot { background: var(--accent); }
+
+  .timeline-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: none;
+    padding: 0;
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+  }
+  .timeline-role { font-size: 1.25rem; }
+  .timeline-org { color: var(--muted); font-size: 0.95rem; margin-top: 4px; }
+  .timeline-when {
+    flex-shrink: 0;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    white-space: nowrap;
+  }
+  .timeline-plus {
+    display: inline-block;
+    font-size: 1.1rem;
+    line-height: 1;
+    transition: transform 0.3s ease;
+  }
+  .timeline-item.open .timeline-plus { transform: rotate(45deg); }
+
+  .timeline-body {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, opacity 0.3s ease, margin-top 0.3s ease;
+  }
+  .timeline-item.open .timeline-body { max-height: 600px; opacity: 1; margin-top: 16px; }
+  .timeline-body ul { list-style: none; padding-left: 0; color: var(--muted); font-size: 0.95rem; }
+  .timeline-body ul li { display: flex; align-items: flex-start; gap: 12px; }
+  .timeline-body ul li + li { margin-top: 12px; }
+  .check-icon { flex-shrink: 0; width: 18px; height: 18px; margin-top: 3px; color: var(--accent); transition: color 0.4s ease; }
+  .timeline-body p { color: var(--muted); font-size: 0.95rem; }
+
+  /* ---------- Sertifikasi & Bahasa ---------- */
+  .creds-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+  }
+  .creds-grid h3 {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--accent);
+    font-weight: normal;
+    margin-bottom: 20px;
+  }
+  .cert-list { list-style: none; }
+  .cert-list li {
+    padding: 14px 0;
+    border-bottom: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+  .cert-list li:last-child { border-bottom: none; }
+  .cert-list li strong { display: block; color: var(--ink); font-weight: normal; font-size: 1.05rem; margin-bottom: 2px; }
+
+  .lang-item { margin-bottom: 22px; }
+  .lang-item:last-child { margin-bottom: 0; }
+  .lang-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 8px;
+  }
+  .lang-row .lang-name {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--ink);
+  }
+  .lang-row .lang-level { font-size: 0.9rem; color: var(--muted); }
+  .lang-bar { height: 4px; background: var(--line); border-radius: 2px; overflow: hidden; }
+  .lang-fill { height: 100%; width: 0%; background: var(--accent); border-radius: 2px; transition: width 1.2s ease, background-color 0.4s ease; }
+  .reveal.visible .lang-fill { width: var(--w); }
+
+  /* ---------- Kontak ---------- */
+  #kontak { text-align: center; padding: 120px 8vw; }
+  #kontak h2 {
+    font-size: clamp(2.2rem, 7vw, 5rem);
+    font-weight: normal;
+    letter-spacing: -1px;
+    line-height: 1.1;
+  }
+  #kontak h2 em { font-style: italic; color: var(--accent); }
+  #kontak .email {
+    display: inline-block;
+    margin-top: 32px;
+    font-size: 1.3rem;
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid var(--accent);
+    padding-bottom: 4px;
+  }
+  .socials {
+    margin-top: 48px;
+    display: flex;
+    justify-content: center;
+    gap: 28px;
+    flex-wrap: wrap;
+  }
+  .socials a {
+    color: var(--muted);
+    text-decoration: none;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    transition: color 0.2s;
+  }
+  .socials a:hover { color: var(--ink); }
+
+  footer {
+    text-align: center;
+    padding: 30px;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 0.75rem;
+    color: var(--muted);
+    letter-spacing: 1px;
+    border-top: 1px solid var(--line);
+  }
+
+  /* ---------- Back to top ---------- */
+  .back-to-top {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: none;
+    background: var(--accent);
+    color: var(--paper);
+    font-size: 1.2rem;
+    cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(12px);
+    transition: opacity 0.3s, transform 0.3s, background-color 0.4s;
+    z-index: 150;
+  }
+  .back-to-top.visible { opacity: 1; pointer-events: auto; transform: translateY(0); }
+  .back-to-top:hover { background: var(--ink); }
+
+  /* ---------- Reveal on scroll ---------- */
+  .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .no-js .reveal { opacity: 1; transform: none; }
+
+  /* ---------- Animasi ---------- */
+  @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } from { opacity: 0; transform: translateY(20px); } }
+  @keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+    .reveal { opacity: 1; transform: none; }
+  }
+
+  /* ---------- Responsif ---------- */
+  @media (max-width: 720px) {
+    nav .links {
+      position: fixed;
+      top: 62px; right: 0;
+      background: var(--paper);
+      flex-direction: column;
+      width: 100%;
+      padding: 20px 8vw;
+      border-bottom: 1px solid var(--line);
+      display: none;
+    }
+    nav .links.open { display: flex; }
+    nav .links a { margin: 12px 0; }
+    .menu-toggle { display: block; }
+    .about-grid { grid-template-columns: 1fr; gap: 32px; }
+    .project { grid-template-columns: 40px 1fr auto; gap: 16px; }
+    .hero-grid { grid-template-columns: 1fr; gap: 32px; }
+    .hero-photo { max-width: 220px; }
+    .timeline-header { flex-direction: column; gap: 6px; }
+    .creds-grid { grid-template-columns: 1fr; gap: 40px; }
+  }
+</style>
+</head>
+<body>
+
+  <!-- ====== PROGRESS BAR ====== -->
+  <div class="progress-bar"></div>
+
+  <!-- ====== NAVIGASI ====== -->
+  <nav>
+    <div class="logo">JEANINI ARMINDO MANEMUNA RIBEIRO SOARES</div>
+    <div class="nav-right">
+      <button class="theme-toggle" aria-label="Toggle dark mode">&#9789;</button>
+      <button class="menu-toggle" aria-label="Menu">&#9776;</button>
+      <div class="links">
+        <a href="#about">about</a>
+        <a href="#pendidikan">education</a>
+        <a href="#pengalaman">experience</a>
+        <a href="#keahlian">skills</a>
+        <a href="#proyek">project</a>
+        <a href="#riset">research</a>
+        <a href="#kontak">contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ====== BACK TO TOP ====== -->
+  <button class="back-to-top" aria-label="Back to top">&#8593;</button>
+
+  <!-- ====== HERO ====== -->
+  <header>
+  <div class="hero-grid">
+    <div class="hero-photo">
+      <img src="figure/ID%20Photo.jpg" alt="Foto Jeanini Armindo Manemuna Ribeiro Soares">
+    </div>
+
+    <div class="hero-text">
+      <div class="eyebrow">Portfolio &middot; 2026</div>
+
+      <h1>
+        Hi, I'm <em>Jeanini Soares</em>, a Data Analyst and Machine Learning Enthusiast.
+      </h1>
+
+      <p class="tagline">
+        I transform data into meaningful insights and predictive solutions using
+        data analysis, visualization, machine learning, and natural language processing
+        to support smarter, data-driven decision making.
+      </p>
+
+      <a href="https://drive.google.com/file/d/1hf9EX23BNzx8E02G3sYToNpDx1I1YtVD/view?usp=sharing" class="cv-button" target="_blank" rel="noopener">Download CV &darr;</a>
+    </div>
+  </div>
+
+  <div class="scroll-hint">
+    Scroll down <span>&darr;</span>
+  </div>
+</header>
+
+<!-- ====== ABOUT ====== --> 
+<section id="about"> 
+
+  <div class="section-label">About Me</div> 
+
+  <div class="about-grid"> 
+
+    <div class="big"> 
+      I am a <em>Data Analyst</em> with a strong interest in turning raw data 
+      into useful insights, patterns, and predictive models that can help solve 
+      real-world problems.
+    </div> 
+
+    <div class="detail"> 
+
+      <p>
+        I have a background in Computer Information Systems with interests in 
+        data analysis, data mining, database management, machine learning, 
+        predictive analytics, and data visualization. I use Python, SQL, and 
+        statistical and machine learning techniques to clean, explore, analyze, 
+        visualize, and model data.
+      </p> 
+
+      <p>
+        My work also focuses on prediction using machine learning, including 
+        classification and risk prediction from structured and text-based data. 
+        I am particularly interested in Natural Language Processing (NLP), 
+        multilingual and code-mixed text analysis, and the application of AI 
+        and predictive models in the Timor-Leste context.
+      </p> 
+
+    </div> 
+
+  </div>
+</section>
+
+  <!-- ====== EDUCATION ====== -->
+  <section id="pendidikan">
+    <div class="section-label">Education</div>
+
+    <div class="timeline">
+
+      <div class="timeline-item open">
+        <div class="timeline-dot"></div>
+        <button class="timeline-header" aria-expanded="true">
+          <div>
+            <div class="timeline-role">Master's in Information Technology</div>
+            <div class="timeline-org">Universiti Teknologi Brunei (UTB), Brunei Darussalam</div>
+          </div>
+          <div class="timeline-when">Aug 2025 &ndash; Jul 2026 <span class="timeline-plus">&#43;</span></div>
+        </button>
+        <div class="timeline-body">
+          <p>Relevant coursework: Intelligent Systems, Data Analysis, Machine Learning, and Management Information Systems.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <button class="timeline-header" aria-expanded="false">
+          <div>
+            <div class="timeline-role">Bachelor of Computer Systems</div>
+            <div class="timeline-org">ITB STIKOM Bali, Denpasar, Indonesia</div>
+          </div>
+          <div class="timeline-when">Sep 2017 &ndash; Nov 2023 <span class="timeline-plus">&#43;</span></div>
+        </button>
+        <div class="timeline-body">
+          <p>Concentration: Computer Systems and Networking.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ====== SERTIFIKASI & BAHASA ====== -->
+  <section id="sertifikasi">
+    <div class="section-label">Certifications & Languages</div>
+
+    <div class="creds-grid">
+
+      <div>
+        <h3>Certifications & Training</h3>
+        <ul class="cert-list">
+          <li><strong>Certified Network Administrator</strong>Nov 2023</li>
+          <li><strong>Beginner Back-End PHP Web Application</strong>Certificate of Completion &mdash; Jul 2018</li>
+          <li><strong>Exploring the Impact of Robot Interaction on Learning Engagement</strong>Certificate &mdash; Apr 2025</li>
+          <li><strong>UBD English Bridge</strong>Overall band 68.75 (Reading, Speaking, Listening) &mdash; Universiti Brunei Darussalam</li>
+          <li><strong>English Language Course</strong>LELI &amp; ETDA, Dili (Completed)</li>
+        </ul>
+      </div>
+
+      <div>
+        <h3>Languages</h3>
+
+        <div class="lang-item">
+          <div class="lang-row"><span class="lang-name">Tetun</span><span class="lang-level">Native</span></div>
+          <div class="lang-bar"><div class="lang-fill" style="--w: 100%"></div></div>
+        </div>
+
+        <div class="lang-item">
+          <div class="lang-row"><span class="lang-name">English</span><span class="lang-level">Fluent</span></div>
+          <div class="lang-bar"><div class="lang-fill" style="--w: 90%"></div></div>
+        </div>
+
+        <div class="lang-item">
+          <div class="lang-row"><span class="lang-name">Bahasa Indonesia</span><span class="lang-level">Used for work</span></div>
+          <div class="lang-bar"><div class="lang-fill" style="--w: 75%"></div></div>
+        </div>
+
+        <div class="lang-item">
+          <div class="lang-row"><span class="lang-name">Portuguese</span><span class="lang-level">Working proficiency</span></div>
+          <div class="lang-bar"><div class="lang-fill" style="--w: 55%"></div></div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ====== PENGALAMAN ====== -->
+  <section id="pengalaman">
+    <div class="section-label">Experience</div>
+
+    <div class="timeline">
+
+      <div class="timeline-item open">
+        <div class="timeline-dot"></div>
+        <button class="timeline-header" aria-expanded="true">
+          <div>
+            <div class="timeline-role">Head of Department, Data Management System Unit (Database Administrator)</div>
+            <div class="timeline-org">Minist&eacute;rio do Desenvolvimento Rural e Habita&ccedil;&atilde;o Comunit&aacute;ria, Dili</div>
+          </div>
+          <div class="timeline-when">Feb 2024 &ndash; Jul 2025 <span class="timeline-plus">&#43;</span></div>
+        </button>
+        <div class="timeline-body">
+          <ul>
+            <li><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Administered and optimized the Ministry's database systems, ensuring data integrity and reliable day-to-day operation.</span></li>
+            <li><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Led the development and management of the Data Rural Gateway, coordinating cross-functional teams to deliver IT solutions.</span></li>
+            <li><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Provided support for the broader IT infrastructure to maintain consistent service availability for staff.</span></li>
+            <li><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Designed and delivered training programs to improve staff proficiency in digital systems and end-user applications.</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <button class="timeline-header" aria-expanded="false">
+          <div>
+            <div class="timeline-role">IT Technician</div>
+            <div class="timeline-org">Minist&eacute;rio do Planeamento e Investimento Estrat&eacute;gico, Dili</div>
+          </div>
+          <div class="timeline-when">Jul 2022 &ndash; Jan 2024 <span class="timeline-plus">&#43;</span></div>
+        </button>
+        <div class="timeline-body">
+          <ul>
+            <li><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Delivered first- and second-line technical support to approximately 50 staff for desktops, laptops, printers, mobile devices and network connectivity issues.</span></li>
+            <li><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Maintained servers and network infrastructure, optimizing performance and minimizing downtime for end users.</span></li>
+            <li><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Prepared technical specifications for IT tenders and verified vendor deliverables against specification before acceptance.</span></li>
+            <li><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Assisted in the deployment and configuration of enterprise applications across the Ministry.</span></li>
+            <li><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Engaged directly with users to understand requirements and delivered custom web-based solutions.</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <button class="timeline-header" aria-expanded="false">
+          <div>
+            <div class="timeline-role">IT Support Engineer</div>
+            <div class="timeline-org">Gabinete do Primeiro Ministro, Dili</div>
+          </div>
+          <div class="timeline-when">Apr 2022 &ndash; Jun 2022 <span class="timeline-plus">&#43;</span></div>
+        </button>
+        <div class="timeline-body">
+          <ul>
+            <li><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Designed, implemented and maintained internal computer networks and end-user environments.</span></li>
+            <li><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Managed network hardware and software configurations.</span></li>
+            <li><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Monitored network performance and implemented improvements to maintain high service availability.</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <button class="timeline-header" aria-expanded="false">
+          <div>
+            <div class="timeline-role">IT Infrastructure</div>
+            <div class="timeline-org">R2M IT Solutions, Dili</div>
+          </div>
+          <div class="timeline-when">Jan 2021 &ndash; Feb 2022 <span class="timeline-plus">&#43;</span></div>
+        </button>
+        <div class="timeline-body">
+          <ul>
+            <li><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Provided technical support to internal users and external clients including the Embassy of the Republic of Korea in Timor-Leste and FDCH Timor-Leste for network and end-user device issues across multiple sites.</span></li>
+            <li><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Coordinated with vendors and service providers for procurement and equipment surveys.</span></li>
+            <li><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Installed and configured network hardware and supported daily network operations across multiple locations.</span></li>
+            <li><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Led initiatives to upgrade network systems and improve overall service reliability.</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <button class="timeline-header" aria-expanded="false">
+          <div>
+            <div class="timeline-role">IT Consultant / Helpdesk</div>
+            <div class="timeline-org">Sinmor, Dili</div>
+          </div>
+          <div class="timeline-when">Jan 2020 &ndash; Feb 2020 <span class="timeline-plus">&#43;</span></div>
+        </button>
+        <div class="timeline-body">
+          <ul>
+            <li><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Provided helpdesk support for computer systems, hardware and software issues, resolving user complaints promptly and efficiently.</span></li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ====== KEAHLIAN ====== -->
+  <section id="keahlian">
+    <div class="section-label">Skills</div>
+
+    <div class="skills-list">
+
+      <div class="skill">
+        <div class="num">01</div>
+        <h3>Data Analysis & Visualization</h3>
+        <p>
+          Analyzing, cleaning, and visualizing data to identify patterns,
+          trends, and meaningful insights for data-driven decision making.
+        </p>
+      </div>
+
+      <div class="skill">
+        <div class="num">02</div>
+        <h3>Machine Learning & Prediction</h3>
+        <p>
+          Building predictive and classification models using machine learning
+          techniques such as Random Forest, Support Vector Machine, Decision Tree,
+          XGBoost, and regression.
+        </p>
+      </div>
+
+      <div class="skill">
+        <div class="num">03</div>
+        <h3>Natural Language Processing</h3>
+        <p>
+          Applying NLP techniques for text preprocessing, TF-IDF feature extraction,
+          sentiment analysis, multilingual text classification, and hate speech detection.
+        </p>
+      </div>
+
+      <div class="skill">
+        <div class="num">04</div>
+        <h3>Database & SQL</h3>
+        <p>
+          Managing structured data, designing databases, writing SQL queries,
+          and maintaining data quality, consistency, and integrity.
+        </p>
+      </div>
+
+      <div class="skill">
+        <div class="num">05</div>
+        <h3>Data Mining</h3>
+        <p>
+          Exploring and mining data to discover patterns, trends, and
+          relationships that support data-driven decision making.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ====== RISET ====== -->
+<section id="riset">
+  <div class="section-label">Research & Publication</div>
+
+  <div class="research-grid">
+
+    <div class="research-card">
+      <div class="r-num">01</div>
+      <h3>Electronic Document Management System Pada Perusahaan R2M IT
+Solutions Berbasis Web Menggunakan Framework Laravel</h3>
+      <p>Developed a Laravel-based Electronic Document Management System (EDMS) to improve digital document storage, management, and retrieval at R2M IT Solutions.</p>
+      <a href="https://drive.google.com/file/d/1JIDhygaW1xKla54-ShwvTzx6isvYFs9u/view?usp=sharing" class="download" target="_blank" rel="noopener">Download ↓</a>
+    </div>
+
+    <div class="research-card">
+      <div class="r-num">02</div>
+      <h3>Predicting Educational Risk in Timor-Leste Using Machine Learning and National Teacher Competency Framework</h3>
+      <p>Used machine learning to predict educational risk and support teacher competency development in Timor-Leste..</p>
+      <a href="#" class="download" target="_blank" rel="noopener">Download ↓</a>
+    </div>
+
+    <div class="research-card">
+      <div class="r-num">03</div>
+      <h3>Multi-label Detection of Multilingual and Code-Mixed Hate Speech in Facebook Comments from Timor-Leste Using Support Vector Machines</h3>
+      <p>On process.</p>
+      <a href="#" class="download" target="_blank" rel="noopener">Download ↓</a>
+    </div>
+
+  </div>
+</section>
+
+
+  <!-- ====== PROYEK ====== -->
+  <section id="proyek">
+    <div class="section-label">Proyek Pilihan</div>
+
+    <div class="project is-static">
+      <div class="p-num">01</div>
+      <div>
+        <h3>Data Rural Gateway</h3>
+        <p>Government data platform for Minist&eacute;rio do Desenvolvimento Rural e Habita&ccedil;&atilde;o Comunit&aacute;ria &mdash; led development and cross-functional coordination to centralize rural development data. Internal government system.</p>
+      </div>
+    </div>
+
+    <a href="https://drive.google.com/file/d/1JIDhygaW1xKla54-ShwvTzx6isvYFs9u/view?usp=sharing" class="project" target="_blank" rel="noopener">
+      <div class="p-num">02</div>
+      <div>
+        <h3>Electronic Document Management System (EDMS)</h3>
+        <p>Laravel-based web application for digital document storage, management, and retrieval, built for R2M IT Solutions.</p>
+      </div>
+      <div class="arrow">&#8599;</div>
+    </a>
+
+    <div class="project is-static">
+      <div class="p-num">03</div>
+      <div>
+        <h3>Custom Web-Based Solutions</h3>
+        <p>Bespoke web tools built for staff at Minist&eacute;rio do Planeamento e Investimento Estrat&eacute;gico, translating user requirements into working applications. Internal government system.</p>
+      </div>
+    </div>
+  </section>
+
+  
+
+  <!-- ====== KONTAK ====== -->
+  <section id="kontak">
+    <h2>Mari <em>berkolaborasi</em>.</h2>
+    <a href="mailto:jeanini.soares123@gmail.com" class="email">jeanini.soares123@gmail.com</a>
+    <div class="socials">
+      <a href="#" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://github.com/jeaniniarmindo" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.linkedin.com/in/jeanini-armindo-manemuna-ribeiro-soares-3b4890191" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2026 Jeanini Soares &mdash; Dibuat dengan HTML, CSS &amp; JavaScript
+  </footer>
+
+  <script>
+    document.documentElement.classList.remove('no-js');
+
+    // ---- Proteksi konten (deterrent, bukan proteksi absolut) ----
+    document.addEventListener('contextmenu', (e) => e.preventDefault());
+    document.addEventListener('dragstart', (e) => e.preventDefault());
+    document.addEventListener('keydown', (e) => {
+      const k = e.key.toLowerCase();
+      const blockCombo = (e.ctrlKey || e.metaKey) && ['u', 's'].includes(k);
+      const blockDevtools = e.key === 'F12' || (e.ctrlKey && e.shiftKey && ['i', 'j', 'c'].includes(k));
+      if (blockCombo || blockDevtools) e.preventDefault();
+    });
+
+    // ---- Menu hamburger (mobile) ----
+    const toggle = document.querySelector('.menu-toggle');
+    const links = document.querySelector('.links');
+    toggle.addEventListener('click', () => links.classList.toggle('open'));
+    links.querySelectorAll('a').forEach(a =>
+      a.addEventListener('click', () => links.classList.remove('open'))
+    );
+
+    // ---- Dark / Light mode toggle ----
+    const themeToggle = document.querySelector('.theme-toggle');
+    const setThemeIcon = () => {
+      themeToggle.innerHTML = document.documentElement.getAttribute('data-theme') === 'dark' ? '&#9788;' : '&#9789;';
+    };
+    setThemeIcon();
+    themeToggle.addEventListener('click', () => {
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      if (isDark) {
+        document.documentElement.removeAttribute('data-theme');
+        localStorage.setItem('theme', 'light');
+      } else {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
+      }
+      setThemeIcon();
+    });
+
+    // ---- Scroll progress bar ----
+    const progressBar = document.querySelector('.progress-bar');
+    const backToTop = document.querySelector('.back-to-top');
+    window.addEventListener('scroll', () => {
+      const scrollTop = document.documentElement.scrollTop;
+      const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      progressBar.style.width = (docHeight > 0 ? (scrollTop / docHeight) * 100 : 0) + '%';
+      backToTop.classList.toggle('visible', scrollTop > window.innerHeight * 0.6);
+    });
+    backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    // ---- Scrollspy (highlight nav sesuai section aktif) ----
+    const navLinks = document.querySelectorAll('.links a');
+    const spySections = Array.from(navLinks)
+      .map(a => document.querySelector(a.getAttribute('href')))
+      .filter(Boolean);
+    const spy = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = '#' + entry.target.id;
+          navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === id));
+        }
+      });
+    }, { rootMargin: '-40% 0px -55% 0px' });
+    spySections.forEach(sec => spy.observe(sec));
+
+    // ---- Timeline accordion (Education & Experience) ----
+    document.querySelectorAll('.timeline-header').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.timeline-item');
+        const isOpen = item.classList.toggle('open');
+        btn.setAttribute('aria-expanded', isOpen);
+      });
+    });
+
+    // ---- Reveal saat scroll ----
+    const revealEls = document.querySelectorAll('section');
+    revealEls.forEach(el => el.classList.add('reveal'));
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    revealEls.forEach(el => observer.observe(el));
+
+    // ---- Tahun otomatis di footer ----
+    document.querySelector('footer').innerHTML =
+      '&copy; ' + new Date().getFullYear() +
+      ' Jeanini Soares &mdash; Dibuat dengan HTML, CSS &amp; JavaScript';
+  </script>
+
+</body>
+</html>

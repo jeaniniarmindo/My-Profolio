@@ -1,0 +1,34 @@
+.research-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 28px;
+}
+.research-card {
+  border: 1px solid var(--line);
+  padding: 32px 28px;
+  transition: border-color 0.3s, transform 0.3s;
+}
+.research-card:hover { border-color: var(--accent); transform: translateY(-4px); }
+.research-card .r-num {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 0.75rem;
+  color: var(--accent);
+  letter-spacing: 1px;
+}
+.research-card h3 { font-size: 1.3rem; font-weight: normal; margin: 12px 0 8px; }
+.research-card p { color: var(--muted); font-size: 0.95rem; margin-bottom: 20px; }
+.research-card .download {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid var(--accent);
+  padding-bottom: 2px;
+  transition: color 0.2s, border-color 0.2s;
+}
+.research-card .download:hover { color: var(--ink); border-color: var(--ink); }
