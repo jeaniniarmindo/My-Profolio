@@ -500,6 +500,7 @@
     border-bottom: 1px solid var(--accent);
     padding-bottom: 4px;
   }
+  #kontak .phone { margin-top: 16px; }
   .socials {
     margin-top: 48px;
     display: flex;
@@ -549,6 +550,112 @@
   }
   .back-to-top.visible { opacity: 1; pointer-events: auto; transform: translateY(0); }
   .back-to-top:hover { background: var(--ink); }
+  .back-to-top { bottom: 104px; right: 38px; }
+
+  /* ---------- Chat assistant ---------- */
+  .chat-toggle {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    width: 64px;
+    height: 64px;
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+    filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.25));
+    transition: transform 0.2s;
+    z-index: 160;
+  }
+  .chat-toggle:hover { transform: scale(1.08); }
+  .chat-toggle img { width: 100%; height: 100%; display: block; }
+  .chat-avatar { width: 36px; height: 36px; margin-right: 10px; flex-shrink: 0; }
+  .chat-title { flex: 1; }
+  .chat-panel {
+    position: fixed;
+    bottom: 104px;
+    right: 28px;
+    width: min(370px, calc(100vw - 32px));
+    height: min(520px, calc(100vh - 130px));
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.18);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(16px);
+    transition: opacity 0.25s, transform 0.25s;
+    z-index: 160;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    user-select: text;
+  }
+  .chat-panel.open { opacity: 1; pointer-events: auto; transform: translateY(0); }
+  .chat-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 18px;
+    background: var(--accent);
+    color: var(--paper);
+  }
+  .chat-head strong { display: block; font-size: 0.95rem; }
+  .chat-head span { font-size: 0.75rem; opacity: 0.85; }
+  .chat-close {
+    background: none;
+    border: none;
+    color: inherit;
+    font-size: 1.4rem;
+    line-height: 1;
+    cursor: pointer;
+  }
+  .chat-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .chat-msg {
+    max-width: 88%;
+    padding: 10px 14px;
+    border-radius: 14px;
+    font-size: 0.88rem;
+    line-height: 1.5;
+    white-space: pre-line;
+  }
+  .chat-msg.bot { background: var(--accent-soft); color: var(--ink); align-self: flex-start; border-bottom-left-radius: 4px; }
+  .chat-msg.user { background: var(--accent); color: var(--paper); align-self: flex-end; border-bottom-right-radius: 4px; }
+  .chat-msg a { color: inherit; font-weight: bold; }
+  .chat-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 12px 16px 16px;
+    max-height: 45%;
+    overflow-y: auto;
+    border-top: 1px solid var(--line);
+  }
+  .chat-options button {
+    background: none;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    border-radius: 999px;
+    padding: 6px 12px;
+    font-size: 0.78rem;
+    font-family: inherit;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+  }
+  .chat-options button:hover { background: var(--accent); color: var(--paper); }
+  @media (max-width: 720px) {
+    .chat-toggle { bottom: 16px; right: 16px; }
+    .chat-panel { right: 16px; bottom: 92px; }
+    .back-to-top { bottom: 92px; right: 26px; }
+  }
 
   /* ---------- Reveal on scroll ---------- */
   .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
@@ -726,12 +833,15 @@
         <h3>Certifications & Training</h3>
         <ul class="cert-list">
           <li><strong>Certified Network Administrator</strong>Nov 2023</li>
+          <li><strong>FCNS (Foresec Certified in Networking Security)</strong>Sep 2023</li>
+          <li><strong>FCCH (Foresec Certified in Computer Hacking)</strong>Nov 2023</li>
           <li><strong>Beginner Back-End PHP Web Application</strong>Certificate of Completion &mdash; Jul 2018</li>
           <li><strong>Exploring the Impact of Robot Interaction on Learning Engagement</strong>Certificate &mdash; Apr 2025</li>
           <li><strong>UBD English Bridge</strong>Overall band 68.75 (Reading, Speaking, Listening) &mdash; Universiti Brunei Darussalam</li>
           <li><strong>English Language Course</strong>LELI &amp; ETDA, Dili (Completed)</li>
         </ul>
       </div>
+      
 
       <div>
         <h3>Languages</h3>
@@ -961,8 +1071,17 @@ Solutions Berbasis Web Menggunakan Framework Laravel</h3>
       </div>
     </div>
 
-    <a href="https://drive.google.com/file/d/1JIDhygaW1xKla54-ShwvTzx6isvYFs9u/view?usp=sharing" class="project" target="_blank" rel="noopener">
+        <div class="project is-static">
       <div class="p-num">02</div>
+      <div>
+        <h3>SeaSight</h3>
+        <p>AI vessel detection for drone imagery &mdash; trained a YOLO11 model on a public dataset of 10,861 labeled ship images (mAP@0.5 of 0.878) and built the pipeline that checks whether a vessel enters a monitored zone and sends a photo alert to Telegram. Proof of concept for maritime logistics monitoring in Timor-Leste.</p>
+      </div>
+    </div>
+
+
+    <a href="https://drive.google.com/file/d/1JIDhygaW1xKla54-ShwvTzx6isvYFs9u/view?usp=sharing" class="project" target="_blank" rel="noopener">
+      <div class="p-num">03</div>
       <div>
         <h3>Electronic Document Management System (EDMS)</h3>
         <p>Laravel-based web application for digital document storage, management, and retrieval, built for R2M IT Solutions.</p>
@@ -971,7 +1090,7 @@ Solutions Berbasis Web Menggunakan Framework Laravel</h3>
     </a>
 
     <div class="project is-static">
-      <div class="p-num">03</div>
+      <div class="p-num">04</div>
       <div>
         <h3>Custom Web-Based Solutions</h3>
         <p>Bespoke web tools built for staff at Minist&eacute;rio do Planeamento e Investimento Estrat&eacute;gico, translating user requirements into working applications. Internal government system.</p>
@@ -981,10 +1100,12 @@ Solutions Berbasis Web Menggunakan Framework Laravel</h3>
 
   
 
-  <!-- ====== KONTAK ====== -->
+  <!-- ====== CONTACT ====== -->
   <section id="kontak">
-    <h2>Mari <em>berkolaborasi</em>.</h2>
+    <h2>Let's <em>collaborate</em>.</h2>
     <a href="mailto:jeanini.soares123@gmail.com" class="email">jeanini.soares123@gmail.com</a>
+    <br>
+    <a href="https://wa.me/670763460" target="_blank" rel="noopener" class="email phone">WhatsApp: +670 763460</a>
     <div class="socials">
       <a href="#" target="_blank" rel="noopener">Instagram</a>
       <a href="https://github.com/jeaniniarmindo" target="_blank" rel="noopener">GitHub</a>
@@ -993,8 +1114,25 @@ Solutions Berbasis Web Menggunakan Framework Laravel</h3>
   </section>
 
   <footer>
-    &copy; 2026 Jeanini Soares &mdash; Dibuat dengan HTML, CSS &amp; JavaScript
+    &copy; 2026 Jeanini Soares &mdash; Built with HTML, CSS &amp; JavaScript
   </footer>
+
+  <!-- ====== CHAT ASSISTANT ====== -->
+  <button class="chat-toggle" aria-label="Open chat assistant" aria-expanded="false" aria-controls="chat-panel">
+    <img src="figure/ai-icon-small.png" alt="">
+  </button>
+  <div class="chat-panel" id="chat-panel" role="dialog" aria-label="Chat assistant">
+    <div class="chat-head">
+      <img class="chat-avatar" src="figure/ai-icon-small.png" alt="">
+      <div class="chat-title">
+        <strong>Jeanini's Assistant</strong>
+        <span>Ask me about Jeanini</span>
+      </div>
+      <button class="chat-close" aria-label="Close chat">&times;</button>
+    </div>
+    <div class="chat-body" aria-live="polite"></div>
+    <div class="chat-options"></div>
+  </div>
 
   <script>
     document.documentElement.classList.remove('no-js');
@@ -1085,10 +1223,105 @@ Solutions Berbasis Web Menggunakan Framework Laravel</h3>
 
     revealEls.forEach(el => observer.observe(el));
 
+    // ---- Chat assistant (jawaban siap pakai, tanpa server) ----
+    const chatTopics = [
+      { label: 'About Jeanini', answer:
+        'Jeanini Soares is a Data Analyst and Machine Learning Enthusiast from Timor-Leste. ' +
+        'Jeanini turns raw data into insights and predictive models using Python, SQL, machine learning and NLP.',
+        link: ['#about', 'Read more'] },
+      { label: 'Skills', answer:
+        '• Data Analysis & Visualization\n' +
+        '• Machine Learning & Prediction (Random Forest, SVM, Decision Tree, XGBoost, regression)\n' +
+        '• Natural Language Processing (TF-IDF, sentiment analysis, multilingual text classification)\n' +
+        '• Database & SQL\n' +
+        '• Data Mining',
+        link: ['#keahlian', 'See skills'] },
+      { label: 'Experience', answer:
+        '• Head of Department, Data Management System Unit (DBA): Ministry of Rural Development, 2024–2025\n' +
+        '• IT Technician: Ministry of Planning and Strategic Investment, 2022–2024\n' +
+        '• IT Support Engineer: Office of the Prime Minister, 2022\n' +
+        '• IT Infrastructure: R2M IT Solutions, 2021–2022\n' +
+        '• IT Consultant / Helpdesk: Sinmor, 2020',
+        link: ['#pengalaman', 'See full experience'] },
+      { label: 'Education', answer:
+        '• Master\'s in Information Technology: Universiti Teknologi Brunei (2025–2026)\n' +
+        '• Bachelor of Computer Systems: ITB STIKOM Bali, Indonesia (2017–2023)',
+        link: ['#pendidikan', 'See education'] },
+      { label: 'Projects', answer:
+        '• SeaSight: AI vessel detection for drone imagery (YOLO11, mAP@0.5 of 0.878) with Telegram alerts\n' +
+        '• Data Rural Gateway: government data platform for rural development\n' +
+        '• EDMS: Laravel-based document management system\n' +
+        '• Custom web-based solutions for government staff',
+        link: ['#proyek', 'See projects'] },
+      { label: 'Research', answer:
+        '• Predicting Educational Risk in Timor-Leste Using Machine Learning\n' +
+        '• Multi-label Detection of Multilingual and Code-Mixed Hate Speech in Facebook Comments (SVM), in progress\n' +
+        '• Web-based Electronic Document Management System (Laravel)',
+        link: ['#riset', 'See research'] },
+      { label: 'Languages', answer:
+        'Tetun (native), English (fluent), Bahasa Indonesia (used for work) and Portuguese (working proficiency).',
+        link: ['#sertifikasi', 'See certifications'] },
+      { label: 'Download CV', answer:
+        'You can view and download Jeanini\'s CV here:',
+        link: ['https://drive.google.com/file/d/1hf9EX23BNzx8E02G3sYToNpDx1I1YtVD/view?usp=sharing', 'Open CV'] },
+      { label: 'Contact / WhatsApp', answer:
+        'Jeanini is open to collaboration and job opportunities.\n' +
+        'Email: jeanini.soares123@gmail.com',
+        link: ['https://wa.me/670763460', 'Chat on WhatsApp'] }
+    ];
+
+    const chatToggle = document.querySelector('.chat-toggle');
+    const chatPanel = document.querySelector('.chat-panel');
+    const chatBody = chatPanel.querySelector('.chat-body');
+    const chatOptions = chatPanel.querySelector('.chat-options');
+
+    const addChatMsg = (text, who, link) => {
+      const msg = document.createElement('div');
+      msg.className = 'chat-msg ' + who;
+      msg.textContent = text;
+      if (link) {
+        const a = document.createElement('a');
+        a.href = link[0];
+        a.textContent = link[1] + ' →';
+        if (link[0].startsWith('#')) {
+          a.addEventListener('click', () => setChatOpen(false));
+        } else {
+          a.target = '_blank';
+          a.rel = 'noopener';
+        }
+        msg.append('\n', a);
+      }
+      chatBody.appendChild(msg);
+      chatBody.scrollTop = chatBody.scrollHeight;
+    };
+
+    const setChatOpen = (open) => {
+      chatPanel.classList.toggle('open', open);
+      chatToggle.setAttribute('aria-expanded', open);
+      if (open && !chatBody.children.length) {
+        addChatMsg('Hi! 👋 I\'m Jeanini\'s assistant. What would you like to know?', 'bot');
+      }
+    };
+
+    chatTopics.forEach(topic => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.textContent = topic.label;
+      btn.addEventListener('click', () => {
+        addChatMsg(topic.label, 'user');
+        setTimeout(() => addChatMsg(topic.answer, 'bot', topic.link), 350);
+      });
+      chatOptions.appendChild(btn);
+    });
+
+    chatToggle.addEventListener('click', () => setChatOpen(!chatPanel.classList.contains('open')));
+    chatPanel.querySelector('.chat-close').addEventListener('click', () => setChatOpen(false));
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setChatOpen(false); });
+
     // ---- Tahun otomatis di footer ----
     document.querySelector('footer').innerHTML =
       '&copy; ' + new Date().getFullYear() +
-      ' Jeanini Soares &mdash; Dibuat dengan HTML, CSS &amp; JavaScript';
+      ' Jeanini Soares &mdash; Built with HTML, CSS &amp; JavaScript';
   </script>
 
 </body>
