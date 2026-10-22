@@ -1,6 +1,6 @@
 # Jeanini Soares — Portfolio
 
-Live: https://jeaniniarmindo.github.io/My-Profolio/
+Live: https://jeaniniarmindo.github.io/
 
 Built with [Astro](https://astro.build) (Node.js). Deployed automatically to GitHub Pages on every push to `main`.
 
@@ -11,6 +11,6 @@ All text (experience, skills, projects, research, contact, chat answers) lives i
 ## Run locally
 ```bash
 npm install
-npm run dev      # http://localhost:4321/My-Profolio/
+npm run dev      # http://localhost:4321/
 npm run build    # production build into dist/
 ```
