@@ -14,7 +14,8 @@ export const profile = {
   whatsapp: 'https://wa.me/67076346078',
   linkedin: 'https://www.linkedin.com/in/jeanini-armindo-manemuna-ribeiro-soares-3b4890191',
   github: 'https://github.com/jeaniniarmindo',
-  cv: 'https://drive.google.com/file/d/1hf9EX23BNzx8E02G3sYToNpDx1I1YtVD/view?usp=sharing',
+  // Direct-download link (Google Drive "uc?export=download" format)
+  cv: 'https://drive.google.com/uc?export=download&id=1pNhUQyl-gdwaFf3pjzJZfjK27wRfq0hn',
   availability: 'Open to opportunities · Willing to travel to the field',
 
   headline:
