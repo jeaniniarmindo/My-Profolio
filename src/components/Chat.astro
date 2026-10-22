@@ -1,0 +1,209 @@
+---
+import Icon from './Icon.astro';
+interface Props { iconSrc: string }
+const { iconSrc } = Astro.props;
+---
+<button class="chat-toggle" type="button" aria-label="Open Jeanini's assistant" aria-expanded="false" aria-controls="chat-panel">
+  <img src={iconSrc} alt="" width="64" height="64" />
+</button>
+<div class="chat-hint" aria-hidden="true">Hi! Ask me about Jeanini 👋</div>
+
+<div class="chat-panel" id="chat-panel" role="dialog" aria-label="Jeanini's assistant" aria-hidden="true">
+  <div class="chat-head">
+    <img src={iconSrc} alt="" width="40" height="40" />
+    <div class="t">
+      <strong>Jeanini’s Assistant</strong>
+      <small>Instant answers</small>
+    </div>
+    <button class="chat-close" type="button" aria-label="Close chat"><Icon name="close" size={18} /></button>
+  </div>
+  <div class="chat-body" aria-live="polite"></div>
+  <div class="chat-chips" role="group" aria-label="Suggested questions"></div>
+  <form class="chat-form">
+    <label for="chat-input" class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Type your question</label>
+    <input id="chat-input" type="text" autocomplete="off" placeholder="Ask anything, e.g. “AI projects?”" maxlength="200" />
+    <button type="submit" aria-label="Send"><Icon name="send" size={18} /></button>
+  </form>
+</div>
+
+<script>
+  import { profile, experience, projects, research, education, languages, certifications } from '../data/profile';
+
+  type Topic = { label: string; keys: string[]; answer: string; link?: [string, string] };
+
+  const topics: Topic[] = [
+    {
+      label: 'Who is Jeanini?',
+      keys: ['who', 'about', 'jeanini', 'introduce', 'summary', 'yourself', 'background', 'profile'],
+      answer: `${profile.fullName} is an ${profile.role.toLowerCase()} based in ${profile.location}, with nearly five years of experience leading IT services for Timor-Leste government ministries and the private sector, and a Master of IT (machine learning & AI) from Universiti Teknologi Brunei.`,
+      link: ['#about', 'Read more'],
+    },
+    {
+      label: 'Experience',
+      keys: ['experience', 'work', 'job', 'career', 'ministry', 'employ', 'history', 'role', 'position', 'head', 'department', 'worked'],
+      answer: experience.map((j) => `• ${j.title} — ${j.org} (${j.period})`).join('\n'),
+      link: ['#experience', 'See full experience'],
+    },
+    {
+      label: 'AI & ML skills',
+      keys: ['ai', 'machine', 'learning', 'ml', 'model', 'python', 'data', 'nlp', 'yolo', 'predict', 'analysis', 'analyst', 'scikit'],
+      answer: 'Machine learning with Python and scikit-learn (Random Forest, SVM, Decision Tree, XGBoost, regression), computer vision with YOLO, NLP (TF-IDF, sentiment and multilingual text classification), and data analysis with pandas and matplotlib.',
+      link: ['#skills', 'See all skills'],
+    },
+    {
+      label: 'IT & networks',
+      keys: ['network', 'it', 'infrastructure', 'server', 'lan', 'support', 'helpdesk', 'database', 'sql', 'mysql', 'security', 'cyber', 'microsoft', '365', 'linux', 'windows'],
+      answer: 'LAN design and troubleshooting, switches and access points, multi-site support, Apache servers, MySQL/MariaDB administration, Windows/Linux, Microsoft 365, and data protection (FCNS certified, role-based access control, backups).',
+      link: ['#skills', 'See all skills'],
+    },
+    {
+      label: 'Projects',
+      keys: ['project', 'seasight', 'vessel', 'ship', 'gateway', 'portfolio', 'built', 'build', 'attendance', 'edms', 'undp'],
+      answer: projects.map((p) => `• ${p.title} — ${p.kind}`).join('\n'),
+      link: ['#projects', 'See projects'],
+    },
+    {
+      label: 'Research',
+      keys: ['research', 'paper', 'publication', 'publish', 'thesis', 'hate', 'speech', 'education risk', 'journal', 'conference'],
+      answer: research.map((r) => `• ${r.title}${r.status ? ` (${r.status})` : ''}`).join('\n'),
+      link: ['#research', 'See research'],
+    },
+    {
+      label: 'Education',
+      keys: ['education', 'degree', 'master', 'bachelor', 'university', 'study', 'studied', 'utb', 'stikom', 'brunei', 'school'],
+      answer: education.map((e) => `• ${e.degree} — ${e.school} (${e.period})`).join('\n'),
+      link: ['#education', 'See education'],
+    },
+    {
+      label: 'Languages',
+      keys: ['language', 'speak', 'english', 'tetun', 'portuguese', 'indonesia', 'bahasa'],
+      answer: languages.map((l) => `• ${l.name}: ${l.level}`).join('\n'),
+    },
+    {
+      label: 'Certifications',
+      keys: ['certif', 'certificate', 'fcns', 'fcch', 'course', 'training'],
+      answer: certifications.map((c) => `• ${c.name}`).join('\n'),
+      link: ['#education', 'See credentials'],
+    },
+    {
+      label: 'Available?',
+      keys: ['available', 'hire', 'hiring', 'opportunit', 'travel', 'relocat', 'freelance', 'open'],
+      answer: 'Yes — Jeanini is open to IT, data and AI opportunities and is willing to travel frequently to the field. The quickest way to reach out is WhatsApp.',
+      link: [profile.whatsapp, 'Chat on WhatsApp'],
+    },
+    {
+      label: 'Download CV',
+      keys: ['cv', 'resume', 'résumé', 'download'],
+      answer: 'Here is the latest CV:',
+      link: [profile.cv, 'Open CV'],
+    },
+    {
+      label: 'Contact',
+      keys: ['contact', 'email', 'mail', 'phone', 'whatsapp', 'number', 'reach', 'call', 'linkedin', 'message'],
+      answer: `Email: ${profile.email}\nWhatsApp / Mobile: ${profile.phone}`,
+      link: [profile.whatsapp, 'Chat on WhatsApp'],
+    },
+  ];
+
+  const toggle = document.querySelector<HTMLButtonElement>('.chat-toggle')!;
+  const panel = document.querySelector<HTMLElement>('.chat-panel')!;
+  const hint = document.querySelector<HTMLElement>('.chat-hint')!;
+  const body = panel.querySelector<HTMLElement>('.chat-body')!;
+  const chips = panel.querySelector<HTMLElement>('.chat-chips')!;
+  const form = panel.querySelector<HTMLFormElement>('.chat-form')!;
+  const input = panel.querySelector<HTMLInputElement>('#chat-input')!;
+
+  const scrollDown = () => (body.scrollTop = body.scrollHeight);
+
+  function addMsg(text: string, who: 'bot' | 'user', link?: [string, string]) {
+    const el = document.createElement('div');
+    el.className = `msg ${who}`;
+    el.textContent = text;
+    if (link) {
+      const a = document.createElement('a');
+      a.href = link[0];
+      a.textContent = `${link[1]} →`;
+      if (link[0].startsWith('#')) a.addEventListener('click', () => setOpen(false));
+      else { a.target = '_blank'; a.rel = 'noopener'; }
+      el.append('\n', a);
+    }
+    body.appendChild(el);
+    scrollDown();
+  }
+
+  function botReply(text: string, link?: [string, string]) {
+    const typing = document.createElement('div');
+    typing.className = 'msg bot typing';
+    typing.innerHTML = '<i></i><i></i><i></i>';
+    body.appendChild(typing);
+    scrollDown();
+    setTimeout(() => { typing.remove(); addMsg(text, 'bot', link); }, 550);
+  }
+
+  function match(q: string): Topic | undefined {
+    const s = q.toLowerCase();
+    const words = s.split(/[^a-z0-9éç]+/).filter(Boolean);
+    let best: Topic | undefined;
+    let bestScore = 0;
+    for (const t of topics) {
+      let score = 0;
+      for (const k of t.keys) {
+        if (k.includes(' ') ? s.includes(k) : words.some((w) => w === k || (k.length > 3 && w.startsWith(k)))) score += 1;
+      }
+      if (score > bestScore) { best = t; bestScore = score; }
+    }
+    return best;
+  }
+
+  function ask(question: string, topic?: Topic) {
+    addMsg(question, 'user');
+    const t = topic ?? match(question);
+    if (/^(hi|hello|hey|halo|ola|olá|bondia)\b/i.test(question.trim()) && !t) {
+      botReply('Hello! 👋 What would you like to know about Jeanini? Try the suggestions below.');
+    } else if (t) {
+      botReply(t.answer, t.link);
+    } else {
+      botReply("I don't have an answer for that yet — Jeanini can tell you directly. Try one of the suggestions below, or:", [profile.whatsapp, 'Ask on WhatsApp']);
+    }
+  }
+
+  topics.forEach((t) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.textContent = t.label;
+    b.addEventListener('click', () => ask(t.label, t));
+    chips.appendChild(b);
+  });
+
+  function setOpen(open: boolean) {
+    panel.classList.toggle('open', open);
+    panel.setAttribute('aria-hidden', String(!open));
+    toggle.setAttribute('aria-expanded', String(open));
+    hint.classList.remove('show');
+    if (open) {
+      if (!body.children.length) {
+        addMsg("Hi! 👋 I'm Jeanini's assistant. Ask me anything about Jeanini's experience, skills or projects — or pick a topic below.", 'bot');
+      }
+      if (matchMedia('(min-width: 601px)').matches) input.focus();
+    }
+  }
+
+  toggle.addEventListener('click', () => setOpen(!panel.classList.contains('open')));
+  panel.querySelector('.chat-close')!.addEventListener('click', () => { setOpen(false); toggle.focus(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && panel.classList.contains('open')) { setOpen(false); toggle.focus(); } });
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const q = input.value.trim();
+    if (!q) return;
+    input.value = '';
+    ask(q);
+  });
+
+  // Friendly nudge once per visit
+  setTimeout(() => {
+    if (!panel.classList.contains('open')) {
+      hint.classList.add('show');
+      setTimeout(() => hint.classList.remove('show'), 6000);
+    }
+  }, 4000);
+</script>

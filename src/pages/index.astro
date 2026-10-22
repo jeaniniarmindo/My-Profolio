@@ -1,0 +1,362 @@
+---
+import { Picture } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import Chat from '../components/Chat.astro';
+import photo from '../assets/photo.jpg';
+import {
+  profile, experience, skills, projects, research, education, certifications, languages,
+} from '../data/profile';
+
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+const nav = [
+  ['about', 'About'],
+  ['experience', 'Experience'],
+  ['skills', 'Skills'],
+  ['projects', 'Projects'],
+  ['research', 'Research'],
+  ['education', 'Education'],
+  ['contact', 'Contact'],
+];
+const featured = projects.find((p) => p.featured)!;
+const others = projects.filter((p) => !p.featured);
+const pad = (n: number) => String(n).padStart(2, '0');
+---
+<Base
+  title={`${profile.name} — ${profile.role}`}
+  description="Portfolio of Jeanini Soares, an ICT professional and machine learning practitioner from Timor-Leste: government IT leadership, networks and databases, and AI projects such as SeaSight vessel detection."
+>
+  <div class="scroll-progress" aria-hidden="true"></div>
+
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="#top" aria-label="Jeanini Soares, back to top">
+        <span class="brand-mark">JS</span>
+        <span>Jeanini Soares</span>
+      </a>
+      <nav aria-label="Main">
+        <ul class="nav-links" id="nav-links">
+          {nav.map(([id, label]) => <li><a href={`#${id}`}>{label}</a></li>)}
+        </ul>
+      </nav>
+      <div class="nav-actions">
+        <button class="icon-btn theme-toggle" type="button" aria-label="Toggle dark mode">
+          <Icon name="moon" size={18} class="i-moon" />
+          <Icon name="sun" size={18} class="i-sun" />
+        </button>
+        <button class="icon-btn menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
+          <Icon name="menu" size={18} />
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- ================= HERO ================= -->
+    <section class="hero" id="top">
+      <div class="wrap">
+        <div class="hero-grid">
+          <div>
+            <span class="pill reveal"><span class="dot"></span>{profile.availability}</span>
+            <h1 class="reveal" style="--d:.05s">Jeanini <em>Soares</em></h1>
+            <p class="role reveal" style="--d:.1s">{profile.role}</p>
+            <p class="lead reveal" style="--d:.15s">{profile.headline}</p>
+            <div class="hero-cta reveal" style="--d:.2s">
+              <a class="btn btn-primary" href={profile.cv} target="_blank" rel="noopener">
+                <Icon name="download" size={18} /> Download CV
+              </a>
+              <a class="btn btn-ghost" href={profile.whatsapp} target="_blank" rel="noopener">
+                <Icon name="whatsapp" size={18} /> WhatsApp me
+              </a>
+            </div>
+            <div class="hero-meta reveal" style="--d:.25s">
+              <span><Icon name="pin" size={16} /> {profile.location}</span>
+              <a href={profile.linkedin} target="_blank" rel="noopener" aria-label="LinkedIn"><Icon name="linkedin" /></a>
+              <a href={profile.github} target="_blank" rel="noopener" aria-label="GitHub"><Icon name="github" /></a>
+              <a href={`mailto:${profile.email}`} aria-label="Email"><Icon name="mail" /></a>
+            </div>
+          </div>
+
+          <div class="portrait reveal" style="--d:.1s">
+            <div class="portrait-frame">
+              <Picture
+                src={photo}
+                formats={['avif', 'webp']}
+                widths={[320, 520, 720]}
+                width={720}
+                sizes="(max-width: 860px) 280px, 360px"
+                alt={`Portrait of ${profile.fullName}`}
+                loading="eager"
+                fetchpriority="high"
+                draggable="false"
+              />
+            </div>
+            <div class="badge badge-1">
+              <span class="b-icon"><Icon name="cap" size={18} /></span>
+              <span><strong>Master of IT</strong>UTB Brunei · 2026</span>
+            </div>
+            <div class="badge badge-2">
+              <span class="b-icon"><Icon name="brain" size={18} /></span>
+              <span><strong>AI &amp; ML</strong>YOLO · scikit-learn</span>
+            </div>
+          </div>
+        </div>
+
+        <dl class="stats reveal">
+          {profile.stats.map((s) => (
+            <div class="stat">
+              <dt class="stat-label">{s.label}</dt>
+              <dd class="stat-value" style="order:-1">
+                {s.prefix}<span data-count={s.value}>{s.value}</span>{s.suffix}
+              </dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </section>
+
+    <!-- ================= ABOUT ================= -->
+    <section class="section alt" id="about">
+      <div class="wrap about-grid">
+        <div class="reveal">
+          <p class="eyebrow">About me</p>
+          <p class="about-quote" style="margin-top:20px">
+            Reliable IT for the people who serve Timor-Leste — and <em>practical AI</em> to help them decide better.
+          </p>
+        </div>
+        <div class="about-text reveal" style="--d:.1s">
+          {profile.about.map((p) => <p>{p}</p>)}
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= EXPERIENCE ================= -->
+    <section class="section" id="experience">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div>
+            <p class="eyebrow">Experience</p>
+            <h2 class="section-title">Five years across <em>ministries</em> and the private sector</h2>
+          </div>
+        </div>
+        <ol class="timeline">
+          {experience.map((job, i) => (
+            <li class:list={['job', 'reveal', { current: job.current }]}>
+              <details open={i === 0}>
+                <summary>
+                  <h3>{job.title}</h3>
+                  <span class="org">{job.org}, {job.place}</span>
+                  <span class="period">{job.period}</span>
+                  <span class="toggle" aria-hidden="true"><Icon name="close" size={18} /></span>
+                </summary>
+                <div class="job-body">
+                  {job.note && <p class="note" style="margin:-8px 0 12px">{job.note}</p>}
+                  <ul>{job.points.map((pt) => <li>{pt}</li>)}</ul>
+                </div>
+              </details>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    <!-- ================= SKILLS ================= -->
+    <section class="section alt" id="skills">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div>
+            <p class="eyebrow">Skills</p>
+            <h2 class="section-title">From the <em>server room</em> to the model</h2>
+          </div>
+          <p class="section-sub">Hands-on across infrastructure, data and AI — the full path from collecting data reliably to learning from it.</p>
+        </div>
+        <div class="skills-grid">
+          {skills.map((s, i) => (
+            <article class="card reveal" style={`--d:${(i % 4) * 0.06}s`}>
+              <span class="card-icon"><Icon name={s.icon as any} size={22} /></span>
+              <h3>{s.title}</h3>
+              <p>{s.text}</p>
+              <ul class="tags">{s.tags.map((t) => <li>{t}</li>)}</ul>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= PROJECTS ================= -->
+    <section class="section" id="projects">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div>
+            <p class="eyebrow">Selected projects</p>
+            <h2 class="section-title">Systems that people <em>actually use</em></h2>
+          </div>
+        </div>
+        <div class="projects-grid">
+          <article class="card project featured reveal">
+            <div>
+              <span class="kind">Featured · {featured.kind}</span>
+              <h3>{featured.title}</h3>
+              <p>{featured.text}</p>
+              <ul class="tags" style="margin-top:18px">{featured.tags.map((t) => <li>{t}</li>)}</ul>
+            </div>
+            <div class="metric-panel">
+              <div class="metric-big"><span data-count="87.8">87.8</span>%</div>
+              <div class="metric-cap">mAP@0.5 detection accuracy</div>
+              <div class="metric-bar" style="--w:87.8%"><span></span></div>
+              <div class="metric-foot"><span>Trained on 10,861 labelled images</span><span>YOLO11</span></div>
+            </div>
+          </article>
+          {others.map((p, i) => (
+            <article class="card project reveal" style={`--d:${(i % 3) * 0.06}s`}>
+              <span class="kind">{p.kind}</span>
+              <h3>{p.title}</h3>
+              <p>{p.text}</p>
+              <ul class="tags">{p.tags.map((t) => <li>{t}</li>)}</ul>
+              {p.link && (
+                <a class="more" href={p.link} target="_blank" rel="noopener">Read the paper <Icon name="external" size={16} /></a>
+              )}
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= RESEARCH ================= -->
+    <section class="section alt" id="research">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div>
+            <p class="eyebrow">Research &amp; publications</p>
+            <h2 class="section-title">Applying ML to <em>Timor-Leste’s</em> own data</h2>
+          </div>
+        </div>
+        <ol class="research-list">
+          {research.map((r, i) => (
+            <li class="card paper reveal">
+              <span class="paper-num">{pad(i + 1)}</span>
+              <div>
+                <h3>{r.title}</h3>
+                <p class="venue">{r.venue}{r.year && ` · ${r.year}`}</p>
+                <p>{r.text}</p>
+              </div>
+              <div class="side">
+                {r.status && (
+                  <span class:list={['status', r.status === 'Published' ? 'published' : 'progress']}>{r.status}</span>
+                )}
+                {r.link && (
+                  <a class="btn btn-ghost" style="padding:8px 14px;font-size:.85rem" href={r.link} target="_blank" rel="noopener">
+                    <Icon name="download" size={16} /> PDF
+                  </a>
+                )}
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    <!-- ================= EDUCATION & CREDENTIALS ================= -->
+    <section class="section" id="education">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div>
+            <p class="eyebrow">Education &amp; credentials</p>
+            <h2 class="section-title">Always <em>learning</em></h2>
+          </div>
+        </div>
+        <div class="creds-grid">
+          <div class="card reveal">
+            <h3 class="block-title"><Icon name="cap" size={22} /> Education</h3>
+            {education.map((e) => (
+              <div class="edu">
+                <h4>{e.degree}</h4>
+                <div class="school">{e.school}</div>
+                <div class="period">{e.period}</div>
+                <p>{e.detail}</p>
+              </div>
+            ))}
+          </div>
+          <div class="card reveal" style="--d:.08s">
+            <h3 class="block-title"><Icon name="globe" size={22} /> Languages</h3>
+            {languages.map((l) => (
+              <div class="lang">
+                <div class="lang-row"><span>{l.name}</span><span>{l.level}</span></div>
+                <div class="lang-bar" style={`--w:${l.value}%`}><span></span></div>
+              </div>
+            ))}
+          </div>
+          <div class="card creds-wide reveal">
+            <h3 class="block-title"><Icon name="award" size={22} /> Certifications &amp; training</h3>
+            <ul class="cert-list">
+              {certifications.map((c) => <li><span>{c.name}</span><span class="when">{c.date}</span></li>)}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= CONTACT ================= -->
+    <section class="section" id="contact" style="padding-top:0">
+      <div class="wrap">
+        <div class="contact-card reveal">
+          <div style="position:relative;z-index:1">
+            <p class="eyebrow" style="color:#a9c6e0">Contact</p>
+            <h2 style="margin-top:14px">Let’s <em>work together</em>.</h2>
+            <p class="sub">
+              Hiring for IT, data or AI roles in Timor-Leste or the region? I reply fastest on WhatsApp.
+            </p>
+            <p class="refs">References available on request.</p>
+          </div>
+          <ul class="contact-list">
+            <li>
+              <a class="contact-item" href={profile.whatsapp} target="_blank" rel="noopener">
+                <span class="ci-icon"><Icon name="whatsapp" /></span>
+                <span class="grow"><small>WhatsApp / Mobile</small><span>{profile.phone}</span></span>
+                <Icon name="arrow" size={18} />
+              </a>
+            </li>
+            <li>
+              <div class="contact-item">
+                <span class="ci-icon"><Icon name="mail" /></span>
+                <a class="grow" href={`mailto:${profile.email}`} style="text-decoration:none;color:inherit">
+                  <small>Email</small><span>{profile.email}</span>
+                </a>
+                <button class="copy-btn" type="button" data-copy={profile.email} aria-label="Copy email address">
+                  <Icon name="copy" size={16} class="i-copy" />
+                  <Icon name="check" size={16} class="i-check" />
+                </button>
+              </div>
+            </li>
+            <li>
+              <a class="contact-item" href={profile.linkedin} target="_blank" rel="noopener">
+                <span class="ci-icon"><Icon name="linkedin" /></span>
+                <span class="grow"><small>LinkedIn</small><span>Jeanini Soares</span></span>
+                <Icon name="arrow" size={18} />
+              </a>
+            </li>
+            <li>
+              <a class="contact-item" href={profile.github} target="_blank" rel="noopener">
+                <span class="ci-icon"><Icon name="github" /></span>
+                <span class="grow"><small>GitHub</small><span>@jeaniniarmindo</span></span>
+                <Icon name="arrow" size={18} />
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-inner">
+      <span>© <span id="year">2026</span> {profile.fullName}</span>
+      <span>Built with Astro · Dili, Timor-Leste</span>
+    </div>
+  </footer>
+
+  <button class="to-top" type="button" aria-label="Back to top"><Icon name="up" size={18} /></button>
+  <Chat iconSrc={`${base}ai-icon.png`} />
+
+  <script src="../scripts/main.ts"></script>
+</Base>
