@@ -64,7 +64,7 @@ const { iconSrc } = Astro.props;
     },
     {
       label: 'Research',
-      keys: ['research', 'paper', 'publication', 'publish', 'thesis', 'hate', 'speech', 'education risk', 'journal', 'conference'],
+      keys: ['research', 'paper', 'publication', 'publish', 'thesis', 'hate', 'speech', 'education risk', 'dropout', 'teacher', 'journal', 'conference'],
       answer: research.map((r) => `• ${r.title}${r.status ? ` (${r.status})` : ''}`).join('\n'),
       link: ['#research', 'See research'],
     },

@@ -182,6 +182,12 @@ export const projects: Project[] = [
     tags: ['YOLO11', 'Python', 'Telegram Bot API'],
   },
   {
+    title: 'Educational Risk Prediction',
+    kind: 'Machine learning · Master’s research',
+    text: 'Predicted dropout risk across Timor-Leste’s 13 municipalities from Ministry of Education, World Bank/UNICEF and census data. Decision Tree reached 75.4% accuracy under leakage-free LOOCV; the key predictors were mapped to SEA-TCF to propose a national Teacher Competency Framework.',
+    tags: ['scikit-learn', 'XGBoost', 'SMOTE', 'LOOCV'],
+  },
+  {
     title: 'Data Rural Gateway',
     kind: 'Government data platform',
     text: 'Led from design through deployment and ongoing management for the Ministry of Rural Development, supporting government workers in Bobonaro, Ainaro and Aileu. Internal government system.',
@@ -225,10 +231,10 @@ export const research = [
   },
   {
     title: 'Predicting Educational Risk in Timor-Leste Using Machine Learning and the National Teacher Competency Framework',
-    venue: 'Machine learning research',
-    year: '',
+    venue: 'Master’s research · Universiti Teknologi Brunei · Supervisor: Dr. Arif Bramantoro',
+    year: 'June 2026',
     status: '',
-    text: 'Uses machine learning to predict educational risk and support teacher competency development in Timor-Leste.',
+    text: 'Classifies district dropout risk (Low / Medium / High) with Decision Tree, Random Forest, SVM and XGBoost under leakage-free LOOCV (best: Decision Tree, 75.4% accuracy). Teacher training hours and absenteeism emerged as actionable predictors, informing a proposed Timor-Leste Teacher Competency Framework aligned with SEA-TCF.',
   },
   {
     title: 'Multi-label Detection of Multilingual and Code-Mixed Hate Speech in Facebook Comments from Timor-Leste Using Support Vector Machines',
