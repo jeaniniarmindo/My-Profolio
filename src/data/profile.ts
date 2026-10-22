@@ -167,23 +167,23 @@ export type Project = {
   kind: string;
   text: string;
   tags: string[];
-  metric?: string;
   link?: string;
-  featured?: boolean;
+  // Featured projects get a large card with a headline metric (value is a percentage)
+  featured?: { value: string; label: string; foot: [string, string] };
 };
 
 export const projects: Project[] = [
   {
     title: 'SeaSight',
     kind: 'AI · Computer vision',
-    featured: true,
-    metric: '87.8% mAP@0.5 · 10,861 images',
+    featured: { value: '87.8', label: 'mAP@0.5 detection accuracy', foot: ['Trained on 10,861 labelled images', 'YOLO11'] },
     text: 'AI-based vessel detection for drone and satellite imagery. Trained a YOLO11 model on 10,861 labelled ship images and built a Python pipeline that detects vessels entering a monitored zone and sends real-time photo alerts through the Telegram Bot API — a proof of concept for maritime monitoring in Timor-Leste.',
     tags: ['YOLO11', 'Python', 'Telegram Bot API'],
   },
   {
     title: 'Educational Risk Prediction',
     kind: 'Machine learning · Master’s research',
+    featured: { value: '75.4', label: 'Risk classification accuracy (Decision Tree)', foot: ['65 district-years · 13 municipalities', 'LOOCV'] },
     text: 'Predicted dropout risk across Timor-Leste’s 13 municipalities from Ministry of Education, World Bank/UNICEF and census data. Decision Tree reached 75.4% accuracy under leakage-free LOOCV; the key predictors were mapped to SEA-TCF to propose a national Teacher Competency Framework.',
     tags: ['scikit-learn', 'XGBoost', 'SMOTE', 'LOOCV'],
   },

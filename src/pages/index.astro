@@ -18,7 +18,7 @@ const nav = [
   ['education', 'Education'],
   ['contact', 'Contact'],
 ];
-const featured = projects.find((p) => p.featured)!;
+const featured = projects.filter((p) => p.featured);
 const others = projects.filter((p) => !p.featured);
 const pad = (n: number) => String(n).padStart(2, '0');
 ---
@@ -193,20 +193,22 @@ const pad = (n: number) => String(n).padStart(2, '0');
           </div>
         </div>
         <div class="projects-grid">
-          <article class="card project featured reveal">
-            <div>
-              <span class="kind">Featured · {featured.kind}</span>
-              <h3>{featured.title}</h3>
-              <p>{featured.text}</p>
-              <ul class="tags" style="margin-top:18px">{featured.tags.map((t) => <li>{t}</li>)}</ul>
-            </div>
-            <div class="metric-panel">
-              <div class="metric-big"><span data-count="87.8">87.8</span>%</div>
-              <div class="metric-cap">mAP@0.5 detection accuracy</div>
-              <div class="metric-bar" style="--w:87.8%"><span></span></div>
-              <div class="metric-foot"><span>Trained on 10,861 labelled images</span><span>YOLO11</span></div>
-            </div>
-          </article>
+          {featured.map((p) => (
+            <article class="card project featured reveal">
+              <div>
+                <span class="kind">Featured · {p.kind}</span>
+                <h3>{p.title}</h3>
+                <p>{p.text}</p>
+                <ul class="tags" style="margin-top:18px">{p.tags.map((t) => <li>{t}</li>)}</ul>
+              </div>
+              <div class="metric-panel">
+                <div class="metric-big"><span data-count={p.featured!.value}>{p.featured!.value}</span>%</div>
+                <div class="metric-cap">{p.featured!.label}</div>
+                <div class="metric-bar" style={`--w:${p.featured!.value}%`}><span></span></div>
+                <div class="metric-foot"><span>{p.featured!.foot[0]}</span><span>{p.featured!.foot[1]}</span></div>
+              </div>
+            </article>
+          ))}
           {others.map((p, i) => (
             <article class="card project reveal" style={`--d:${(i % 3) * 0.06}s`}>
               <span class="kind">{p.kind}</span>
